@@ -30,6 +30,9 @@ cpu_py39: &cpu_py39
 
 # Here are list of GPU images:
 #   https://circleci.com/docs/2.0/configuration-reference/#available-linux-gpu-images
+# T4 machines:
+#   gpu.nvidia.small.multi: 2GPU
+#   gpu.nvidia.medium.multi: 4GPU
 gpu: &gpu
   environment:
     CUDA_VERSION: "10.2"
@@ -38,7 +41,7 @@ gpu: &gpu
     # This image actually has cuda-11.1 installed, but it doesn't seems to affect us
     # using pytorch cu10 builds below.
     image: ubuntu-1604-cuda-10.2:202012-01
-  resource_class: gpu.large
+  resource_class: gpu.nvidia.medium.multi
 
 gpu_cu111: &gpu_cu111
   environment:
@@ -46,7 +49,7 @@ gpu_cu111: &gpu_cu111
     CUDA_HOME: /usr/local/cuda-11.2
   machine:
     image: ubuntu-2004-cuda-11.2:202103-01
-  resource_class: gpu.large
+  resource_class: gpu.nvidia.medium.multi
 
 # -------------------------------------------------------------------------------------
 # Re-usable commands
